@@ -92,9 +92,9 @@ public class EscolaController {
 	@PutMapping(value = "/alunos/{id}")
 	public ResponseEntity<Aluno> updateAluno(@PathVariable("id") long id, @RequestBody Aluno aluno) {
 		return alunoRepository.findById(id).map(record -> {
-			record.setId(aluno.getId());
-			Aluno updated = alunoRepository.save(record);
-			return ResponseEntity.ok().body(updated);
+            record.setNome(aluno.getNome());
+            Aluno updated = alunoRepository.save(record);
+            return ResponseEntity.ok().body(updated);
 		}).orElse(ResponseEntity.notFound().build());
 	}
 
@@ -127,9 +127,9 @@ public class EscolaController {
 	@PutMapping(value = "/turmas/{id}")
 	public ResponseEntity<Turma> updateTurma(@PathVariable("id") long id, @RequestBody Turma turma) {
 		return turmaRepository.findById(id).map(record -> {
-			record.setId(turma.getId());
-			Turma updated = turmaRepository.save(record);
-			return ResponseEntity.ok().body(updated);
+		record.setNome(turma.getNome());
+            Turma updated = turmaRepository.save(record);
+            return ResponseEntity.ok().body(updated);
 		}).orElse(ResponseEntity.notFound().build());
 	}
 
