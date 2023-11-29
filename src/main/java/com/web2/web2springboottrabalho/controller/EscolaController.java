@@ -1,7 +1,9 @@
 package com.web2.web2springboottrabalho.controller;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -50,6 +52,9 @@ public class EscolaController {
 
 	@PostMapping("/alunoTurma") // Alterei a URL para "/alunoTurma"
 	public AlunoTurma create(@RequestBody AlunoTurma aluno) {
+		System.out.println(aluno.getAlunoId());
+		System.out.println(aluno.getTurmaId());
+		System.out.println(aluno);
 		return repository.save(aluno);
 	}
 
@@ -76,6 +81,17 @@ public class EscolaController {
 	@GetMapping("/alunos")
 	public List<?> findAllAluno() {
 		return alunoRepository.findAll();
+	}
+
+	@GetMapping("/alunosOrdenado")
+	public String[] findAllAlunoOrder() {
+		List<Aluno> alunos =  alunoRepository.findAll();
+		String[] ordenado = new String[alunos.size()];
+		for (int i = 0; i < alunos.size(); i++) {
+			ordenado[i] = alunos.get(i).getNome();
+		}
+		Arrays.sort(ordenado);
+		return ordenado;
 	}
 
 	@GetMapping(path = { "/alunos/{id}" })
@@ -111,6 +127,17 @@ public class EscolaController {
 	@GetMapping("/turmas")
 	public List<?> findAllTurma() {
 		return turmaRepository.findAll();
+	}
+	
+	@GetMapping("/turmasOrdenado")
+	public String[] findAllTurmaOrder() {
+		List<Turma> turmas =  turmaRepository.findAll();
+		String[] ordenado = new String[turmas.size()];
+		for (int i = 0; i < turmas.size(); i++) {
+			ordenado[i] = turmas.get(i).getNome();
+		}
+		Arrays.sort(ordenado);
+		return ordenado;
 	}
 
 	@GetMapping(path = { "/turmas/{id}" })

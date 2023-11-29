@@ -6,6 +6,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SecondaryTable;
 
 @Entity
 public class AlunoTurma {
@@ -16,38 +18,52 @@ public class AlunoTurma {
 	private int id;
 
 	@JoinColumn(name = "aluno_id", referencedColumnName = "id", table = "aluno", columnDefinition = "char(36)")
-	private int aluno_Id;
+	private int alunoId;
 
 	@JoinColumn(name = "turma_id", referencedColumnName = "id", table = "turma", columnDefinition = "char(36)")
-	private int turma_Id;
+	private int turmaId;
+
+	public AlunoTurma() {
+    }
 
 	public int getId() {
 		return id;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		if (id > 0) {
+			this.id = id;
+		} else {
+			throw new IllegalArgumentException("O ID deve ser um número inteiro positivo");
+		}
 	}
 
 	public int getAlunoId() {
-		return aluno_Id;
+		return alunoId;
 	}
 
 	public void setAlunoId(int alunoId) {
-		this.aluno_Id = alunoId;
+		if (alunoId > 0) {
+			this.alunoId = alunoId;
+		} else {
+			throw new IllegalArgumentException("O ID do aluno deve ser um número inteiro positivo");
+		}
 	}
 
 	public int getTurmaId() {
-		return turma_Id;
+		return turmaId;
 	}
 
 	public void setTurmaId(int turmaId) {
-		this.turma_Id = turmaId;
+		if (turmaId > 0) {
+			this.turmaId = turmaId;
+		} else {
+			throw new IllegalArgumentException("O ID da turma deve ser um número inteiro positivo");
+		}
 	}
 
 	@Override
 	public String toString() {
-		return "AlunoTurma [id=" + id + ", aluno_Id=" + aluno_Id + ", turma_Id=" + turma_Id + "]";
+		return "AlunoTurma [id=" + id + ", alunoId=" + alunoId + ", turmaId=" + turmaId + "]";
 	}
-
 }

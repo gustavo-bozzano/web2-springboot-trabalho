@@ -27,7 +27,11 @@ public class Aluno {
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		if (id > 0) {
+			this.id = id;
+		} else {
+			throw new IllegalArgumentException("O ID deve ser um número inteiro positivo");
+		}
 	}
 
 	public String getNome() {
@@ -35,6 +39,11 @@ public class Aluno {
 	}
 
 	public void setNome(String nome) {
-		this.nome = nome;
+		if (nome != null && !nome.isBlank()) {
+			this.nome = nome;
+		} else {
+			throw new IllegalArgumentException("Nome não pode estar em branco");
+		}
+
 	}
 }
