@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.web2.web2springboottrabalho.models.Aluno;
 
 @Repository
-public interface AlunoRepository extends JpaRepository<Aluno, Long> {
+public interface AlunoRepository extends JpaRepository<Aluno, Integer> {
 
 }

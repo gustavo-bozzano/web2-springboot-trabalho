@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 import com.web2.web2springboottrabalho.models.AlunoTurma;
 
 @Repository
-public interface EscolaRepository extends JpaRepository<AlunoTurma, Long> {
+public interface EscolaRepository extends JpaRepository<AlunoTurma, Integer> {
 }

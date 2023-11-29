@@ -43,7 +43,7 @@ public class EscolaController {
 	}
 
 	@GetMapping(path = { "/{id}" })
-	public ResponseEntity<?> findById(@PathVariable long id) {
+	public ResponseEntity<?> findById(@PathVariable Integer id) {
 		return repository.findById(id).map(record -> ResponseEntity.ok().body(record))
 				.orElse(ResponseEntity.notFound().build());
 	}
@@ -54,7 +54,7 @@ public class EscolaController {
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<AlunoTurma> update(@PathVariable("id") long id, @RequestBody AlunoTurma aluno) {
+	public ResponseEntity<AlunoTurma> update(@PathVariable("id") Integer id, @RequestBody AlunoTurma aluno) {
 		return repository.findById(id).map(record -> {
 			record.setAlunoId(aluno.getAlunoId());
 			record.setTurmaId(aluno.getTurmaId());
@@ -64,7 +64,7 @@ public class EscolaController {
 	}
 
 	@DeleteMapping(path = { "/{id}" })
-	public ResponseEntity<?> delete(@PathVariable Long id) {
+	public ResponseEntity<?> delete(@PathVariable Integer id) {
 		return repository.findById(id).map(record -> {
 			repository.deleteById(id);
 			return ResponseEntity.ok().build();
@@ -79,7 +79,7 @@ public class EscolaController {
 	}
 
 	@GetMapping(path = { "/alunos/{id}" })
-	public ResponseEntity<?> findByIdAluno(@PathVariable long id) {
+	public ResponseEntity<?> findByIdAluno(@PathVariable Integer id) {
 		return alunoRepository.findById(id).map(record -> ResponseEntity.ok().body(record))
 				.orElse(ResponseEntity.notFound().build());
 	}
@@ -90,7 +90,7 @@ public class EscolaController {
 	}
 
 	@PutMapping(value = "/alunos/{id}")
-	public ResponseEntity<Aluno> updateAluno(@PathVariable("id") long id, @RequestBody Aluno aluno) {
+	public ResponseEntity<Aluno> updateAluno(@PathVariable("id") Integer id, @RequestBody Aluno aluno) {
 		return alunoRepository.findById(id).map(record -> {
             record.setNome(aluno.getNome());
             Aluno updated = alunoRepository.save(record);
@@ -99,7 +99,7 @@ public class EscolaController {
 	}
 
 	@DeleteMapping(path = { "/alunos/{id}" })
-	public ResponseEntity<?> deleteAluno(@PathVariable Long id) {
+	public ResponseEntity<?> deleteAluno(@PathVariable Integer id) {
 		return alunoRepository.findById(id).map(record -> {
 			alunoRepository.deleteById(id);
 			return ResponseEntity.ok().build();
@@ -114,7 +114,7 @@ public class EscolaController {
 	}
 
 	@GetMapping(path = { "/turmas/{id}" })
-	public ResponseEntity<?> findByIdTurma(@PathVariable long id) {
+	public ResponseEntity<?> findByIdTurma(@PathVariable Integer id) {
 		return turmaRepository.findById(id).map(record -> ResponseEntity.ok().body(record))
 				.orElse(ResponseEntity.notFound().build());
 	}
@@ -125,7 +125,7 @@ public class EscolaController {
 	}
 
 	@PutMapping(value = "/turmas/{id}")
-	public ResponseEntity<Turma> updateTurma(@PathVariable("id") long id, @RequestBody Turma turma) {
+	public ResponseEntity<Turma> updateTurma(@PathVariable("id") Integer id, @RequestBody Turma turma) {
 		return turmaRepository.findById(id).map(record -> {
 		record.setNome(turma.getNome());
             Turma updated = turmaRepository.save(record);
@@ -134,7 +134,7 @@ public class EscolaController {
 	}
 
 	@DeleteMapping(path = { "/turmas/{id}" })
-	public ResponseEntity<?> deleteTurma(@PathVariable Long id) {
+	public ResponseEntity<?> deleteTurma(@PathVariable Integer id) {
 		return turmaRepository.findById(id).map(record -> {
 			turmaRepository.deleteById(id);
 			return ResponseEntity.ok().build();
