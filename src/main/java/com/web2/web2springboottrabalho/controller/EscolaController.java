@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,11 +52,13 @@ public class EscolaController {
 	}
 
 	@PostMapping("/alunoTurma") // Alterei a URL para "/alunoTurma"
-	public AlunoTurma create(@RequestBody AlunoTurma aluno) {
-		System.out.println(aluno.getAlunoId());
-		System.out.println(aluno.getTurmaId());
-		System.out.println(aluno);
-		return repository.save(aluno);
+	public ResponseEntity<String> create(@RequestBody AlunoTurma aluno) {
+		try {
+			AlunoTurma alunoTurma = repository.save(aluno);
+			return ResponseEntity.status(HttpStatus.CREATED).body(alunoTurma.toString());
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("ERRO, CHAVE ESTRANGEIRA NULA\n");
+		}
 	}
 
 	@PutMapping(value = "/{id}")
@@ -85,7 +88,7 @@ public class EscolaController {
 
 	@GetMapping("/alunosOrdenado")
 	public String[] findAllAlunoOrder() {
-		List<Aluno> alunos =  alunoRepository.findAll();
+		List<Aluno> alunos = alunoRepository.findAll();
 		String[] ordenado = new String[alunos.size()];
 		for (int i = 0; i < alunos.size(); i++) {
 			ordenado[i] = alunos.get(i).getNome();
@@ -108,9 +111,9 @@ public class EscolaController {
 	@PutMapping(value = "/alunos/{id}")
 	public ResponseEntity<Aluno> updateAluno(@PathVariable("id") Integer id, @RequestBody Aluno aluno) {
 		return alunoRepository.findById(id).map(record -> {
-            record.setNome(aluno.getNome());
-            Aluno updated = alunoRepository.save(record);
-            return ResponseEntity.ok().body(updated);
+			record.setNome(aluno.getNome());
+			Aluno updated = alunoRepository.save(record);
+			return ResponseEntity.ok().body(updated);
 		}).orElse(ResponseEntity.notFound().build());
 	}
 
@@ -128,10 +131,10 @@ public class EscolaController {
 	public List<?> findAllTurma() {
 		return turmaRepository.findAll();
 	}
-	
+
 	@GetMapping("/turmasOrdenado")
 	public String[] findAllTurmaOrder() {
-		List<Turma> turmas =  turmaRepository.findAll();
+		List<Turma> turmas = turmaRepository.findAll();
 		String[] ordenado = new String[turmas.size()];
 		for (int i = 0; i < turmas.size(); i++) {
 			ordenado[i] = turmas.get(i).getNome();
@@ -154,9 +157,9 @@ public class EscolaController {
 	@PutMapping(value = "/turmas/{id}")
 	public ResponseEntity<Turma> updateTurma(@PathVariable("id") Integer id, @RequestBody Turma turma) {
 		return turmaRepository.findById(id).map(record -> {
-		record.setNome(turma.getNome());
-            Turma updated = turmaRepository.save(record);
-            return ResponseEntity.ok().body(updated);
+			record.setNome(turma.getNome());
+			Turma updated = turmaRepository.save(record);
+			return ResponseEntity.ok().body(updated);
 		}).orElse(ResponseEntity.notFound().build());
 	}
 
@@ -167,10 +170,10 @@ public class EscolaController {
 			return ResponseEntity.ok().build();
 		}).orElse(ResponseEntity.notFound().build());
 	}
-	
+
 	@GetMapping("/favicon.ico")
 	public void favicon(HttpServletResponse response) throws IOException {
-	    // Lógica para retornar o ícone ou um recurso vazio
-	    response.setStatus(HttpServletResponse.SC_NO_CONTENT); // Retorna resposta vazia (204 No Content)
+		// Lógica para retornar o ícone ou um recurso vazio
+		response.setStatus(HttpServletResponse.SC_NO_CONTENT); // Retorna resposta vazia (204 No Content)
 	}
 }

@@ -23,9 +23,6 @@ public class AlunoTurma {
 	@JoinColumn(name = "turma_id", referencedColumnName = "id", table = "turma", columnDefinition = "char(36)")
 	private int turmaId;
 
-	public AlunoTurma() {
-    }
-
 	public int getId() {
 		return id;
 	}
