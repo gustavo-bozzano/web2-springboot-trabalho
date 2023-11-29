@@ -1,4 +1,4 @@
-package book;
+package main.book;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BookController {
 
-	private final BookService service = new BookService();
+	private final BookService service;
 
 	@PostMapping
 	public ResponseEntity<?> save(@RequestBody BookRequest request) {

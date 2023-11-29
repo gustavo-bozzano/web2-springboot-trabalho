@@ -1,4 +1,4 @@
-package book;
+package main.book;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

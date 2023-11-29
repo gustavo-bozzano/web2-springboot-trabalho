@@ -1,0 +1,8 @@
+{
+    "http.client": {
+        "firstname": "Martin",
+        "lastname": "Assis",
+        "email": "martin@exemplomail.com",
+        "password": "senhaForte"
+    }
+}

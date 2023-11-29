@@ -1,10 +1,11 @@
-package auth;
+package main.auth;
 
-import config.JwtService;
-import user.Role;
-import user.User;
-import user.UserRepository;
 import lombok.RequiredArgsConstructor;
+import main.config.JwtService;
+import main.user.Role;
+import main.user.User;
+import main.user.UserRepository;
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;

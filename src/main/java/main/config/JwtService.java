@@ -1,4 +1,4 @@
-package config;
+package main.config;
 
 import java.security.Key;
 import java.util.Date;
@@ -18,7 +18,7 @@ import io.jsonwebtoken.security.Keys;
 @Service
 public class JwtService {
 
-	private static final String SECRET_KEY = "";
+	private static final String SECRET_KEY = "Bearer Java";
 
 	public String extractUsername(String token) {
 		return extractClaims(token, Claims::getSubject);

@@ -1,9 +1,7 @@
-package token;
+package main.token;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,7 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import user.User;
+import main.user.User;
 
 @Data
 @Builder
@@ -30,7 +28,6 @@ public class Token {
 	@Column(unique = true)
 	public String token;
 
-	@Enumerated(EnumType.STRING)
 	public boolean revoked;
 
 	public boolean expired;
